@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Short URL</title>
+</head>
+<body>
+    <h1 style="text-align: center;">NameYourUrl</h1>
+    <form action="/url" method="post">
+        <label for="ogurl">Enter the Original URL</label>
+        <input type="text" name="originalurl" placeholder="https://www.example.com/" id="ogurl"/>
+        <br/>
+        <br/>
+        <label id="userch">Enter the name you want to give </label>
+        <input type="text" name="userchoice"  id="userch" placeholder="Any name you want "/> 
+        <br/>
+        <br/>
+        <button type="submit">Generate URL</button>
+    </form>
+    
+    <% if (locals.id) { %>
+        <div style="display: inline;">
+        <p id="shortUrlText"><%= locals.baseUrl||'http://localhost:8000' %>/<%=locals.id %></p>
+        <button onclick='navigator.clipboard.writeText(document.getElementById("shortUrlText").textContent)'>
+            COPY
+        </button>
+         <button onclick="window.location.href='/'">↻ Refresh/Home</button>
+
+    </div>
+
+       
+    <% } %>
+    <% if (locals.error) { %>
+        <p>The short name already exist</p>
+         <button onclick="window.location.href='/'">↻ Refresh/Home</button>
+
+    </div>
+    
+       
+    <% } %>
+   <!--Home button                 -->
+    
+</body>
+</html>
