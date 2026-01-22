@@ -49,17 +49,7 @@ app.get("/:short", async (req, res) => {
     const shorturl = req.params.short;
     
     // CORRECT: Proper parentheses and { new: true }
-    const entry = await Url.findOneAndUpdate(
-        { shortid: shorturl },
-        {
-            $push: {
-                visithistory: {
-                    timestamp: Date.now(),
-                }
-            }
-        },
-        { new: true }  // Returns updated document
-    );
+    const entry = await Url.findOne({ shortid: shorturl })
     
     console.log("Database result:", entry);
     
@@ -69,7 +59,7 @@ app.get("/:short", async (req, res) => {
         return res.status(404).send("URL not found");
     }
     
-    console.log("Redirecting to:", entry.redirecturl);
+    //console.log("Redirecting to:", entry.redirecturl);
     res.redirect(entry.redirecturl);
 });
 
